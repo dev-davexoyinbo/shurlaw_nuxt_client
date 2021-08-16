@@ -1,0 +1,73 @@
+<template>
+  <div class="header header-light head-shadow">
+    <div class="container">
+      <nav id="navigation" class="navigation navigation-landscape">
+        <div class="nav-header">
+          <a class="nav-brand" href="#">
+            <img src="~/assets/img/spl.png" width="50%" class="logo" alt="" />
+          </a>
+          <div class="nav-toggle"></div>
+        </div>
+        <div class="nav-menus-wrapper" style="transition-property: none">
+          <ul class="nav-menu">
+            <li class="active">
+              <a href="#">Home<span class="submenu-indicator"></span></a>
+            </li>
+
+            <li><a href="about.html">About us</a></li>
+            <li><a href="listings.html">Listings</a></li>
+
+            <li>
+              <a href="JavaScript:Void(0);"
+                >Resources<span class="submenu-indicator"></span
+              ></a>
+              <ul class="nav-dropdown nav-submenu">
+                <li>
+                  <a target="_blank" href="https://shurlawproperties.com"
+                    >Need a Property Lawyer?</a
+                  >
+                </li>
+                <li>
+                  <a target="_blank" href="https://shurlawproperties.com"
+                    >Need property Insurance?</a
+                  >
+                </li>
+                <li>
+                  <a target="_blank" href="https://shurlawproperties.com"
+                    >Need Registered Surveyors?</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="contact.html"
+                >Contact us<span class="submenu-indicator"></span
+              ></a>
+            </li>
+          </ul>
+
+          <ul class="nav-menu nav-menu-social align-to-right">
+            <li>
+              <a href="#" data-toggle="modal" data-target="#login">
+                <i class="fas fa-user-circle mr-1"></i>Login</a
+              >
+            </li>
+            <li class="add-listing theme-bg">
+              <a href="#" data-toggle="modal" data-target="#signup"
+                >Add Property</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {};
+</script>
+
+<style>
+</style>
