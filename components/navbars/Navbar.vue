@@ -42,9 +42,8 @@
             </li>
 
             <li>
-              <a href="contact.html"
-                >Contact us<span class="submenu-indicator"></span
-              ></a>
+              <nuxt-link to="/contact">Contact us</nuxt-link>
+              <span class="submenu-indicator"></span>
             </li>
           </ul>
 
