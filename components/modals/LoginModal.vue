@@ -44,7 +44,10 @@
               </div>
 
               <div class="form-group">
-                <a href="dashboard.html" class="btn btn-md full-width pop-login"
+                <a
+                  href="/dashboard.html"
+                  @click.prevent="gotoPage(`/dashboard`)"
+                  class="btn btn-md full-width pop-login"
                   >Login</a
                 >
               </div>
@@ -61,7 +64,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    gotoPage(path) {
+      event?.preventDefault();
+      return this.$nuxt.$router.push(path);
+    },
+  },
+};
 </script>
 
 <style>
