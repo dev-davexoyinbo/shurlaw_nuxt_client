@@ -16,7 +16,7 @@
               ></nuxt-link>
             </li>
             <li><nuxt-link to="/about">About us</nuxt-link></li>
-            <li><a href="listings.html">Listings</a></li>
+            <li><nuxt-link to="/listings">Listings</nuxt-link></li>
 
             <li>
               <a href="JavaScript:Void(0);"
