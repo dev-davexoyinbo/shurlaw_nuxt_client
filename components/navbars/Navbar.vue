@@ -10,11 +10,12 @@
         </div>
         <div class="nav-menus-wrapper" style="transition-property: none">
           <ul class="nav-menu">
-            <li class="active">
-              <a href="#">Home<span class="submenu-indicator"></span></a>
+            <li>
+              <nuxt-link to="/"
+                >Home<span class="submenu-indicator"></span
+              ></nuxt-link>
             </li>
-
-            <li><a href="about.html">About us</a></li>
+            <li><nuxt-link to="/about">About us</nuxt-link></li>
             <li><a href="listings.html">Listings</a></li>
 
             <li>
