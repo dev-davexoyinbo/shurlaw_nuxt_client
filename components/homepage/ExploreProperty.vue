@@ -49,8 +49,7 @@
             <div class="listing-detail-wrapper pb-0">
               <div class="listing-short-detail">
                 <h4 class="listing-name">
-                  <a href="single-property-1.html">Shorlet Apartment</a
-                  ><i class="list-status ti-check"></i>
+                  <nuxt-link to="/property/adfdd">Shorlet Apartment</nuxt-link>
                 </h4>
               </div>
             </div>
