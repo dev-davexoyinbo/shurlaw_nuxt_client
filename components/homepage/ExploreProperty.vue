@@ -552,8 +552,10 @@
             <div class="listing-detail-wrapper pb-0">
               <div class="listing-short-detail">
                 <h4 class="listing-name">
-                  <a href="single-property-1.html">Luxury Home in Ikoyi</a
-                  ><i class="list-status ti-check"></i>
+                  <nuxt-link to="/property/adfdd"
+                    >Luxury Home in Ikoyi</nuxt-link
+                  >
+                  <i class="list-status ti-check"></i>
                 </h4>
               </div>
             </div>

@@ -9,7 +9,9 @@
     <div class="d-navigation">
       <ul>
         <li class="active">
-          <a href="dashboard.html"><i class="ti-user"></i>My Profile</a>
+          <nuxt-link to="/dashboard"
+            ><i class="ti-user"></i>My Profile</nuxt-link
+          >
         </li>
         <li>
           <a href="bookmark-list.html"><i class="ti-bookmark"></i>All Agents</a>
