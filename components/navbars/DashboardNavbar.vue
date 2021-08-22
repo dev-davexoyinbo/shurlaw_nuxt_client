@@ -1,9 +1,9 @@
 <template>
   <div class="dashboard-navbar">
     <div class="d-user-avater">
-      <img src="~/assets/img/user-3.jpg" class="img-fluid avater" alt="" />
-      <h4>Adam Harshvardhan</h4>
-      <span>Canada USA</span>
+      <img :src="profilePhoto" class="img-fluid avater" alt="" />
+      <h4>{{ user.name }}</h4>
+      <span>{{ `${user.state}, ${user.country}` }}</span>
     </div>
 
     <div class="d-navigation">
@@ -38,7 +38,23 @@
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    // debugger;
+  },
+  computed: {
+    profilePhoto() {
+      return (
+        this.$config.baseUrl.replace(/\/$/, "") +
+        "/" +
+        this.$auth.user.profile_photo.replace(/^\//, "")
+      );
+    },
+    user() {
+      return this.$auth.user;
+    },
+  },
+};
 </script>
 
 <style>

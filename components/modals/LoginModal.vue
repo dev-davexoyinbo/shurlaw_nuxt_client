@@ -18,14 +18,16 @@
         <div class="modal-body">
           <h4 class="modal-header-title">Log In</h4>
           <div class="login-form">
-            <form>
+            <form @submit.prevent="login">
               <div class="form-group">
                 <label>User Name</label>
                 <div class="input-with-icon">
                   <input
-                    type="text"
+                    type="email"
                     class="form-control"
-                    placeholder="Username"
+                    placeholder="Email"
+                    ref="emailInput"
+                    required
                   />
                   <i class="ti-user"></i>
                 </div>
@@ -38,18 +40,23 @@
                     type="password"
                     class="form-control"
                     placeholder="*******"
+                    ref="passwordInput"
+                    required
                   />
                   <i class="ti-unlock"></i>
                 </div>
               </div>
 
+              <small class="text-danger text-center">{{ errorMessage }}</small>
+
               <div class="form-group">
-                <a
-                  href="/dashboard.html"
-                  @click.prevent="gotoPage(`/dashboard`)"
+                <button
+                  @click.prevent="login"
+                  type="submit"
                   class="btn btn-md full-width pop-login"
-                  >Login</a
                 >
+                  Login
+                </button>
               </div>
             </form>
           </div>
@@ -65,7 +72,39 @@
 
 <script>
 export default {
+  data() {
+    return {
+      errorMessage: "",
+    };
+  },
   methods: {
+    login() {
+      event?.preventDefault();
+      event?.stopPropagation();
+
+      const email = this.$refs.emailInput.value;
+      const password = this.$refs.passwordInput.value;
+
+      // try {
+      // this.$toast.show("Logging in...");
+
+      this.errorMessage = "";
+      this.$auth
+        .loginWith("local", { data: { email, password } })
+        .then((response) => {
+          // this.$toast.success("Successfully authenticated");
+        })
+        .catch((e) => {
+          // this.$toast.error("Error while authenticating");
+          if (e.response.data && e.response.data.message)
+            this.errorMessage = e.response.data.message;
+        })
+        .finally(() => {
+          setTimeout(() => {
+            this.errorMessage = "";
+          }, 10000);
+        });
+    },
     gotoPage(path) {
       event?.preventDefault();
       return this.$nuxt.$router.push(path);

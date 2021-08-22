@@ -268,7 +268,10 @@ Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ult
 <script>
 import DashboardNavbar from "~/components/navbars/DashboardNavbar.vue";
 export default {
+  middleware: ["auth"],
   components: { DashboardNavbar },
+  mounted() {},
+  
 };
 </script>
 

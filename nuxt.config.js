@@ -1,4 +1,8 @@
 export default {
+  publicRuntimeConfig: {
+    baseUrl: process.env.BASE_URL || "http://localhost:8000",
+    apiUrl: process.env.API_URL || "http://localhost:8000/api"
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: "shurlaw_nuxt_frontend",
@@ -42,17 +46,62 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
+  buildModules: ["@nuxtjs/dotenv"],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    "@nuxtjs/axios"
+    "@nuxtjs/axios",
+    "@nuxtjs/axios",
+    "@nuxtjs/auth-next",
+    "@nuxtjs/toast"
   ],
+
+  toast: {
+    position: "top-center",
+    register: [
+      // Register custom toasts
+      {
+        name: "my-error",
+        message: "Oops...Something went wrong",
+        options: {
+          type: "error"
+        }
+      }
+    ]
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {},
+
+  auth: {
+    redirect: {
+      login: "/",
+      logout: "/",
+      callback: "/",
+      home: "/dashboard"
+    },
+    strategies: {
+      local: {
+        token: {
+          property: "token",
+          global: true,
+          // required: true,
+          type: "Bearer"
+        },
+        user: {
+          property: "user"
+          // autoFetch: true
+        },
+        endpoints: {
+          login: { url: process.env.API_URL + "/auth/login", method: "post" },
+          // logout: { url: "/api/auth/logout", method: "post" },
+          user: { url: process.env.API_URL + "/auth/me", method: "get" }
+        }
+      }
+    }
+  }
 };
