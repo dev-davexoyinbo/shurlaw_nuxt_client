@@ -14,19 +14,23 @@
           >
         </li>
         <li>
-          <a href="bookmark-list.html"><i class="ti-bookmark"></i>All Agents</a>
-        </li>
-        <li>
-          <a href="my-property.html"><i class="ti-layers"></i>My Listings</a>
-        </li>
-        <li>
-          <a href="submit-property-dashboard.html"
-            ><i class="ti-pencil-alt"></i>Add New Property</a
+          <nuxt-link to="/dashboard/agents"
+            ><i class="ti-bookmark"></i>All Agents</nuxt-link
           >
         </li>
         <li>
-          <a href="change-password.html"
-            ><i class="ti-unlock"></i>Change Password</a
+          <nuxt-link to="/dashboard/my-properties"
+            ><i class="ti-layers"></i>My Listings</nuxt-link
+          >
+        </li>
+        <li>
+          <nuxt-link to="/dashboard/create-property"
+            ><i class="ti-pencil-alt"></i>Add New Property</nuxt-link
+          >
+        </li>
+        <li>
+          <nuxt-link to="/dashboard/change-password"
+            ><i class="ti-unlock"></i>Change Password</nuxt-link
           >
         </li>
         <li>
@@ -45,7 +49,7 @@ export default {
   computed: {
     profilePhoto() {
       return (
-        this.$config.baseUrl.replace(/\/$/, "") +
+        process.env.baseUrl.replace(/\/$/, "") +
         "/" +
         this.$auth.user.profile_photo.replace(/^\//, "")
       );

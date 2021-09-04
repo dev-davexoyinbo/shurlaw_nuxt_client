@@ -10,6 +10,11 @@
         </div>
         <div class="nav-menus-wrapper" style="transition-property: none">
           <ul class="nav-menu">
+            <li v-if="$auth.loggedIn">
+              <nuxt-link to="/dashboard"
+                >Dashboard<span class="submenu-indicator"></span
+              ></nuxt-link>
+            </li>
             <li>
               <nuxt-link to="/"
                 >Home<span class="submenu-indicator"></span
