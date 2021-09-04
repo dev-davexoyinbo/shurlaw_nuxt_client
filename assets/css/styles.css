@@ -5311,6 +5311,8 @@ form.search-form.search-shadow {
 .property-listing.property-1 .listing-img-wrapper img {
   max-height: 240px;
   width: 100%;
+  /* Edited */
+  object-fit: cover;
 }
 .property-listing.property-1 .listing-detail-wrapper {
   padding: 1.5rem 1rem;
@@ -5587,6 +5589,8 @@ span.tag_t {
   max-height: 240px;
   min-height: 240px;
   width: 100%;
+  /* Edited */
+  object-fit: cover;
 }
 .property-listing.property-2 .listing-detail-wrapper {
   padding: 1rem 1.5rem;

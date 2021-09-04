@@ -1,5 +1,5 @@
 export default {
-  publicRuntimeConfig: {
+  env: {
     baseUrl: process.env.BASE_URL || "http://localhost:8000",
     apiUrl: process.env.API_URL || "http://localhost:8000/api"
   },
@@ -72,7 +72,9 @@ export default {
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseUrl: process.env.API_URL
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
@@ -97,9 +99,9 @@ export default {
           // autoFetch: true
         },
         endpoints: {
-          login: { url: process.env.API_URL + "/auth/login", method: "post" },
+          login: { url: "/auth/login", method: "post" },
           // logout: { url: "/api/auth/logout", method: "post" },
-          user: { url: process.env.API_URL + "/auth/me", method: "get" }
+          user: { url: "/auth/me", method: "get" }
         }
       }
     }

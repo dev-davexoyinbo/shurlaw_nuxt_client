@@ -5,7 +5,7 @@
     <!-- ============================ Hero Banner End ================================== -->
 
     <!-- ================= Explore Property ================= -->
-    <explore-property />
+    <explore-property :propertiesPagination="propertiesPagination" />
     <div class="clearfix"></div>
     <!-- ============================ Step How To Use End ================================== -->
 
@@ -28,6 +28,26 @@ export default {
     HeroBanner,
     ExploreProperty,
     CallToAction,
+  },
+  async asyncData({ $axios }) {
+    let propertiesPagination = {};
+
+    const fetchProperties = new Promise((resolve, reject) => {
+      $axios
+        .$get("/properties")
+        .then((response) => {
+          propertiesPagination = response.properties;
+          console.log(response);
+          resolve();
+        })
+        .catch((e) => reject(e));
+    });
+
+    await Promise.allSettled([fetchProperties]);
+
+    return {
+      propertiesPagination,
+    };
   },
 };
 </script>
