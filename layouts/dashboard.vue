@@ -1,7 +1,7 @@
 <template>
   <div class="green-skin">
-    <div id="preloader">
-      <!-- <div class="preloader"><span></span><span></span></div> -->
+    <div id="preloader" v-show="!loaded">
+      <div class="preloader"><span></span><span></span></div>
     </div>
 
     <div id="main-wrapper">
@@ -58,7 +58,14 @@ export default {
     ColorSwitcher,
     Navbar,
   },
-  mounted() {},
+  data() {
+    return {
+      loaded: false,
+    };
+  },
+  mounted() {
+    this.loaded = true;
+  },
 };
 </script>
 

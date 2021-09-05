@@ -53,15 +53,13 @@
           </ul>
 
           <ul class="nav-menu nav-menu-social align-to-right">
-            <li>
+            <li v-if="!$auth.loggedIn">
               <a href="#" data-toggle="modal" data-target="#login">
                 <i class="fas fa-user-circle mr-1"></i>Login</a
               >
             </li>
-            <li class="add-listing theme-bg">
-              <a href="#" data-toggle="modal" data-target="#signup"
-                >Add Property</a
-              >
+            <li class="add-listing theme-bg" v-if="$auth.loggedIn">
+              <nuxt-link to="dashboard/create-property">Add Property</nuxt-link>
             </li>
           </ul>
         </div>

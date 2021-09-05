@@ -1,6 +1,6 @@
 <template>
   <div class="green-skin">
-    <div id="preloader">
+    <div id="preloader" v-show="!loaded">
       <div class="preloader"><span></span><span></span></div>
     </div>
 
@@ -59,6 +59,14 @@ export default {
     CallToAction,
     BackToTopButton,
     SignupModal,
+  },
+  data() {
+    return {
+      loaded: false,
+    };
+  },
+  mounted() {
+    this.loaded = true;
   },
 };
 </script>

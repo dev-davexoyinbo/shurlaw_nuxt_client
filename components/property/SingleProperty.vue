@@ -4,9 +4,9 @@
       <div class="list-img-slide">
         <div class="click">
           <div v-for="image in galleryImages" :key="image">
-            <a href="single-property-1.html"
+            <nuxt-link :to="`/property/${property.slug}`"
               ><img :src="image" class="img-fluid mx-auto" alt=""
-            /></a>
+            /></nuxt-link>
           </div>
         </div>
       </div>
@@ -16,8 +16,10 @@
     <div class="listing-detail-wrapper pb-0">
       <div class="listing-short-detail">
         <h4 class="listing-name">
-          <a href="single-property-1.html">{{ property.title }}</a
-          ><i class="list-status ti-check"></i>
+          <nuxt-link :to="`/property/${property.slug}`">{{
+            property.title
+          }}</nuxt-link>
+          <i class="list-status ti-check"></i>
         </h4>
       </div>
     </div>

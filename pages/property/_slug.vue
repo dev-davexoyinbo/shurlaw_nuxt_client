@@ -6,29 +6,13 @@
         <div class="row align-items-center">
           <div class="col-lg-7 col-md-7 col-sm-12">
             <div class="slider-for">
-              <a href="~/assets/img/p-1.jpg" class="item-slick"
-                ><img src="~/assets/img/p-1.jpg" alt="Alt"
-              /></a>
-              <a href="~/assets/img/p-2.jpg" class="item-slick"
-                ><img src="~/assets/img/p-2.jpg" alt="Alt"
-              /></a>
-              <a href="~/assets/img/p-3.jpg" class="item-slick"
-                ><img src="~/assets/img/p-3.jpg" alt="Alt"
-              /></a>
-              <a href="~/assets/img/p-4.jpg" class="item-slick"
-                ><img src="~/assets/img/p-4.jpg" alt="Alt"
-              /></a>
-              <a href="~/assets/img/p-5.jpg" class="item-slick"
-                ><img src="~/assets/img/p-5.jpg" alt="Alt"
-              /></a>
-              <a href="~/assets/img/p-6.jpg" class="item-slick"
-                ><img src="~/assets/img/p-6.jpg" alt="Alt"
-              /></a>
-              <a href="~/assets/img/p-7.jpg" class="item-slick"
-                ><img src="~/assets/img/p-7.jpg" alt="Alt"
-              /></a>
-              <a href="~/assets/img/p-8.jpg" class="item-slick"
-                ><img src="~/assets/img/p-8.jpg" alt="Alt"
+              <a
+                v-for="url in galleryImages"
+                :key="url"
+                :href="url"
+                target="_blank"
+                class="item-slick"
+                ><img :src="url" alt="Alt"
               /></a>
             </div>
           </div>
@@ -36,15 +20,20 @@
           <div class="col-lg-5 col-md-5 col-sm-12">
             <div class="single-advance-caption">
               <div class="property-name-info">
-                <h4 class="property-name">Green Realty Smart Apartment</h4>
+                <h4 class="property-name">{{ title }}</h4>
                 <p class="property-desc">
-                  2 Bedrooms, Kitchen,and bathrooms included with balcony
+                  {{ description }}
                 </p>
               </div>
 
               <div class="property-price-info">
-                <h4 class="property-price">$23,5487.00</h4>
-                <p class="property-sqa">70,00<sub>m2</sub> (5485$/m2)</p>
+                <h4 class="property-price">N {{ formatNumber(price) }}</h4>
+                <p class="property-sqa">
+                  {{ formatNumber(area) }}<sub>m2</sub> ({{
+                    formatNumber(Number(price) / Number(area))
+                  }}
+                  NGN/m2)
+                </p>
               </div>
 
               <div class="property-statement">
@@ -53,14 +42,14 @@
                     <i class="lni-apartment"></i>
                     <div class="ps-trep">
                       <span>Type</span>
-                      <h5 class="ps-type">Apartment</h5>
+                      <h5 class="ps-type">{{ type.toLowerCase() }}</h5>
                     </div>
                   </li>
                   <li>
                     <i class="lni-restaurant"></i>
                     <div class="ps-trep">
-                      <span>Build On</span>
-                      <h5 class="ps-type">2007</h5>
+                      <span>Building Age</span>
+                      <h5 class="ps-type">{{ building_age }}</h5>
                     </div>
                   </li>
                   <li>
@@ -73,8 +62,8 @@
                   <li>
                     <i class="lni-leaf"></i>
                     <div class="ps-trep">
-                      <span>Let</span>
-                      <h5 class="ps-type">Own</h5>
+                      <span>Status</span>
+                      <h5 class="ps-type">For {{ status.toLowerCase() }}</h5>
                     </div>
                   </li>
                 </ul>
@@ -86,29 +75,8 @@
         <div class="row">
           <div class="col-lg-12 col-md-12">
             <div class="slider-nav">
-              <div class="item-slick">
-                <img src="~/assets/img/p-1.jpg" alt="Alt" />
-              </div>
-              <div class="item-slick">
-                <img src="~/assets/img/p-2.jpg" alt="Alt" />
-              </div>
-              <div class="item-slick">
-                <img src="~/assets/img/p-3.jpg" alt="Alt" />
-              </div>
-              <div class="item-slick">
-                <img src="~/assets/img/p-4.jpg" alt="Alt" />
-              </div>
-              <div class="item-slick">
-                <img src="~/assets/img/p-5.jpg" alt="Alt" />
-              </div>
-              <div class="item-slick">
-                <img src="~/assets/img/p-6.jpg" alt="Alt" />
-              </div>
-              <div class="item-slick">
-                <img src="~/assets/img/p-7.jpg" alt="Alt" />
-              </div>
-              <div class="item-slick">
-                <img src="~/assets/img/p-8.jpg" alt="Alt" />
+              <div class="item-slick" v-for="url in galleryImages" :key="url">
+                <img :src="url" alt="Alt" />
               </div>
             </div>
           </div>
@@ -124,13 +92,20 @@
               <div class="slide-property-first">
                 <div class="pr-price-into">
                   <h2>
-                    $1700 <i>/ monthly</i>
-                    <span class="prt-type rent">For Rental</span>
+                    NGN {{ formatNumber(price) }}
+                    <i v-if="status.toLowerCase() == 'rent'">/ yearly</i>
+                    <span
+                      v-if="status.toLowerCase() == 'rent'"
+                      class="prt-type rent"
+                      >For Rental</span
+                    >
+                    <span
+                      v-if="status.toLowerCase() == 'sale'"
+                      class="prt-type rent"
+                      >For Sale</span
+                    >
                   </h2>
-                  <span
-                    ><i class="lni-map-marker"></i> 778 Country St. Panama City,
-                    FL</span
-                  >
+                  <span><i class="lni-map-marker"></i> {{ address }}</span>
                 </div>
               </div>
 
@@ -216,14 +191,14 @@
 
               <div class="block-body">
                 <ul class="dw-proprty-info">
-                  <li><strong>Bedrooms</strong>2</li>
-                  <li><strong>Bathrooms</strong>2</li>
-                  <li><strong>Garage</strong>Yes</li>
-                  <li><strong>Area</strong>570 sq ft</li>
-                  <li><strong>Type</strong>Apartment</li>
-                  <li><strong>Price</strong>$53264</li>
-                  <li><strong>City</strong>New York</li>
-                  <li><strong>Build On</strong>2007</li>
+                  <li><strong>Bedrooms</strong>{{ bedroom_count }}</li>
+                  <li><strong>Bathrooms</strong>{{ bathroom_count }}</li>
+                  <li><strong>Garage</strong>{{ garage_count || "No" }}</li>
+                  <li><strong>Area</strong>{{ formatNumber(area) }} sq m2</li>
+                  <li><strong>Type</strong>{{ type.toLowerCase() }}</li>
+                  <li><strong>Price</strong>NGN {{ formatNumber(price) }}</li>
+                  <li><strong>City</strong>{{ city }}</li>
+                  <li><strong>Building Age</strong>{{ building_age }}</li>
                 </ul>
               </div>
             </div>
@@ -235,13 +210,7 @@
               </div>
 
               <div class="block-body">
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book.
-                </p>
+                <p>{{ description }}</p>
               </div>
             </div>
 
@@ -253,24 +222,15 @@
 
               <div class="block-body">
                 <ul class="avl-features third">
-                  <li>Air Conditioning</li>
-                  <li>Swimming Pool</li>
-                  <li>Central Heating</li>
-                  <li>Laundry Room</li>
-                  <li>Gym</li>
-                  <li>Alarm</li>
-                  <li>Window Covering</li>
-                  <li>Internet</li>
-                  <li>Pets Allow</li>
-                  <li>Free WiFi</li>
-                  <li>Car Parking</li>
-                  <li>Spa & Massage</li>
+                  <li v-for="feature in other_features" :key="feature">
+                    {{ feature }}
+                  </li>
                 </ul>
               </div>
             </div>
 
             <!-- Single Block Wrap -->
-            <div class="block-wrap">
+            <div class="block-wrap" v-show="false">
               <div class="block-header">
                 <h4 class="block-title">Floor Plan</h4>
               </div>
@@ -366,7 +326,7 @@
             </div>
 
             <!-- Single Block Wrap -->
-            <div class="block-wrap">
+            <div class="block-wrap" v-show="false">
               <div class="block-header">
                 <h4 class="block-title">Location</h4>
               </div>
@@ -384,7 +344,7 @@
             </div>
 
             <!-- Property Reviews -->
-            <div class="block-wrap">
+            <div class="block-wrap" v-show="false">
               <div class="block-header">
                 <h4 class="block-title">47 Reviews</h4>
               </div>
@@ -473,7 +433,7 @@
             </div>
 
             <!-- Nearest Places -->
-            <div class="block-wrap">
+            <div class="block-wrap" v-show="false">
               <div class="block-header">
                 <h4 class="block-title">Nearby Places</h4>
               </div>
@@ -564,7 +524,7 @@
             </div>
 
             <!-- Single Block Wrap -->
-            <div class="block-wrap">
+            <div class="block-wrap" v-show="false">
               <div class="block-header">
                 <h4 class="block-title">Write A Review</h4>
               </div>
@@ -663,7 +623,7 @@ I'm interested in this property.</textarea
               </div>
 
               <!-- Mortgage Calculator -->
-              <div class="sidebar-widgets">
+              <div class="sidebar-widgets" v-show="false">
                 <h4>Mortgage Calculator</h4>
 
                 <div class="form-group">
@@ -852,8 +812,34 @@ import CallToAction from "~/components/homepage/CallToAction.vue";
 import PropertyHeroBanner from "~/components/property/PropertyHeroBanner.vue";
 export default {
   components: { PropertyHeroBanner, CallToAction },
-  asyncData({ route }) {
+  async asyncData({ route, params, $axios, error }) {
     if (process.client) location.href = route.fullPath;
+
+    const slug = params.slug;
+
+    const property = await $axios
+      .$get(`/properties/${slug}`)
+      .then((response) => response.property)
+      .catch((e) => {
+        console.log(e);
+        error({ statusCode: 404, message: "Post not found" });
+      });
+
+    return property;
+  },
+  methods: {
+    formatNumber(number) {
+      return Number(Number(number).toFixed(2)).toLocaleString();
+    },
+  },
+  computed: {
+    galleryImages() {
+      return (this.gallery || []).map((el) => {
+        return (
+          process.env.baseUrl.replace(/\/$/, "") + "/" + el.replace(/^\//, "")
+        );
+      });
+    },
   },
 };
 </script>
