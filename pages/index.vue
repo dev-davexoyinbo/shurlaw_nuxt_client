@@ -37,7 +37,6 @@ export default {
         .$get("/properties")
         .then((response) => {
           propertiesPagination = response.properties;
-          console.log(response);
           resolve();
         })
         .catch((e) => reject(e));
