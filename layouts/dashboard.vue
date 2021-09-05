@@ -1,7 +1,7 @@
 <template>
   <div class="green-skin">
     <div id="preloader">
-      <div class="preloader"><span></span><span></span></div>
+      <!-- <div class="preloader"><span></span><span></span></div> -->
     </div>
 
     <div id="main-wrapper">

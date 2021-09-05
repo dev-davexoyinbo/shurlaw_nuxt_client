@@ -659,6 +659,7 @@ export default {
         .$post("/properties", formData)
         .then((response) => {
           form.reset();
+          this.$nuxt.$router.push(`/property/${response.slug}`);
         })
         .catch((e) => {
           if (e.response && e.response.data && e.response.data.message)
