@@ -59,7 +59,7 @@
               >
             </li>
             <li class="add-listing theme-bg" v-if="$auth.loggedIn">
-              <nuxt-link to="dashboard/create-property">Add Property</nuxt-link>
+              <nuxt-link to="/dashboard/create-property">Add Property</nuxt-link>
             </li>
           </ul>
         </div>

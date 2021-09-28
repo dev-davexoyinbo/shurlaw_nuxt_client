@@ -1,4 +1,7 @@
 export default {
+  server: {
+    host: '0.0.0.0',
+  },
   env: {
     baseUrl: process.env.BASE_URL || "http://localhost:8000",
     apiUrl: process.env.API_URL || "http://localhost:8000/api"
@@ -73,7 +76,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseUrl: process.env.API_URL
+    baseUrl: process.env.API_URL || "http://localhost:8000/api"
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

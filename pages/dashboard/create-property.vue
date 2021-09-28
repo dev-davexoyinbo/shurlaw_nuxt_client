@@ -186,7 +186,7 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                      <label>Area <span class="text-danger">*</span></label>
+                      <label>Area (sq m2) <span class="text-danger">*</span></label>
                       <input
                         type="text"
                         class="form-control"
