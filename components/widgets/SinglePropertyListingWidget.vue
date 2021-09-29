@@ -29,13 +29,6 @@
             href="#"
             data-toggle="tooltip"
             data-placement="top"
-            title="202 User View"
-            ><i class="ti-eye"></i
-          ></a>
-          <a
-            href="#"
-            data-toggle="tooltip"
-            data-placement="top"
             title="Delete Property"
             class="delete"
             ><i class="ti-close"></i

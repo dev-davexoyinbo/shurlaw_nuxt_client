@@ -51,7 +51,6 @@
 
               <div class="form-group">
                 <button
-                  @click.prevent="login"
                   type="submit"
                   class="btn btn-md full-width pop-login"
                 >
@@ -79,8 +78,8 @@ export default {
   },
   methods: {
     login() {
-      event?.preventDefault();
-      event?.stopPropagation();
+      event.preventDefault();
+      event.stopPropagation();
 
       const email = this.$refs.emailInput.value;
       const password = this.$refs.passwordInput.value;

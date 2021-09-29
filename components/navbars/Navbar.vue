@@ -22,30 +22,7 @@
             </li>
             <li><nuxt-link to="/about">About us</nuxt-link></li>
             <li><nuxt-link to="/listings">Listings</nuxt-link></li>
-
-            <li>
-              <a href="JavaScript:Void(0);"
-                >Resources<span class="submenu-indicator"></span
-              ></a>
-              <ul class="nav-dropdown nav-submenu">
-                <li>
-                  <a target="_blank" href="https://shurlawproperties.com"
-                    >Need a Property Lawyer?</a
-                  >
-                </li>
-                <li>
-                  <a target="_blank" href="https://shurlawproperties.com"
-                    >Need property Insurance?</a
-                  >
-                </li>
-                <li>
-                  <a target="_blank" href="https://shurlawproperties.com"
-                    >Need Registered Surveyors?</a
-                  >
-                </li>
-              </ul>
-            </li>
-
+            
             <li>
               <nuxt-link to="/contact">Contact us</nuxt-link>
               <span class="submenu-indicator"></span>

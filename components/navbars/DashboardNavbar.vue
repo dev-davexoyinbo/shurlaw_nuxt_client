@@ -8,22 +8,43 @@
 
     <div class="d-navigation">
       <ul>
-        <li :class="{active: $nuxt.$route.fullPath == '/dashboard'}">
+        <li :class="{ active: $nuxt.$route.fullPath == '/dashboard' }">
           <nuxt-link to="/dashboard"
             ><i class="ti-user"></i>My Profile</nuxt-link
           >
         </li>
-        <li :class="{active: $nuxt.$route.fullPath.startsWith('/dashboard/agents')}">
+        <li
+          v-show="
+            $auth.loggedIn &&
+            $auth.user &&
+            $auth.user.permissions.some(el => el == `agents_view`)
+          "
+          :class="{
+            active: $nuxt.$route.fullPath.startsWith('/dashboard/agents'),
+          }"
+        >
           <nuxt-link to="/dashboard/agents"
             ><i class="ti-bookmark"></i>All Agents</nuxt-link
           >
         </li>
-         <li :class="{active: $nuxt.$route.fullPath.startsWith('/dashboard/my-properties')}">
+        <li
+          :class="{
+            active: $nuxt.$route.fullPath.startsWith(
+              '/dashboard/my-properties'
+            ),
+          }"
+        >
           <nuxt-link to="/dashboard/my-properties"
             ><i class="ti-layers"></i>My Listings</nuxt-link
           >
         </li>
-        <li :class="{active: $nuxt.$route.fullPath.startsWith('/dashboard/create-property')}">
+        <li
+          :class="{
+            active: $nuxt.$route.fullPath.startsWith(
+              '/dashboard/create-property'
+            ),
+          }"
+        >
           <nuxt-link to="/dashboard/create-property"
             ><i class="ti-pencil-alt"></i>Add New Property</nuxt-link
           >
@@ -34,7 +55,9 @@
           >
         </li>
         <li>
-          <a href="#"><i class="ti-power-off"></i>Log Out</a>
+          <a href="#" @click.prevent="logout"
+            ><i class="ti-power-off"></i>Log Out</a
+          >
         </li>
       </ul>
     </div>
@@ -45,6 +68,14 @@
 export default {
   mounted() {
     // debugger;
+  },
+  methods: {
+    logout() {
+      event.preventDefault();
+      this.$auth.logout().then(() => {
+        this.$nuxt.$router.push("/");
+      });
+    },
   },
   computed: {
     profilePhoto() {
