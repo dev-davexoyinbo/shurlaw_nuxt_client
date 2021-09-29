@@ -2,9 +2,10 @@
   <div class="">
     <div class="dashboard-wraper">
       <a
-        href="add-agent.html"
+        href="/dashboard/agents/add"
         style="float: right; border-radius: 20px"
         class="btn btn-primary"
+        @click.prevent="gotoPage(`/dashboard/agents/add`)"
         >Add new Agent</a
       >
       <br />
@@ -82,11 +83,18 @@
         </tbody>
       </table>
     </div>
+
   </div>
 </template>
-
+		<!-- New Js -->
 <script>
 export default {
   layout: "dashboard",
+  methods: {
+    gotoPage(path) {
+      event.preventDefault()
+      this.$nuxt.$router.push(path)
+    }
+  }
 };
 </script>

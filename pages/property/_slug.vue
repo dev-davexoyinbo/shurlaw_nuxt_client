@@ -592,9 +592,9 @@
                     <img src="~/assets/img/user-6.jpg" alt="" />
                   </div>
                   <div class="agent-details">
-                    <h4><a href="#">Shivangi Preet</a></h4>
+                    <h4><a href="#">{{contact_name}}</a></h4>
                     <span
-                      ><i class="lni-phone-handset"></i>(91) 123 456 7895</span
+                      ><i class="lni-phone-handset"></i>{{contact_phone}}</span
                     >
                   </div>
                   <div class="clearfix"></div>
