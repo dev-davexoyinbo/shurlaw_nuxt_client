@@ -7,23 +7,28 @@
       </div>
 
       <div class="row">
-        <single-property-listing-widget v-for="property in properties" :key="property.id" :property="property" />
+        <single-property-listing-widget
+          @property-deleted="propertyDeleted(property.id)"
+          v-for="property in properties"
+          :key="property.id"
+          :property="property"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import SinglePropertyListingWidget from '~/components/widgets/SinglePropertyListingWidget.vue';
+import SinglePropertyListingWidget from "~/components/widgets/SinglePropertyListingWidget.vue";
 export default {
   components: { SinglePropertyListingWidget },
   layout: "dashboard",
   data() {
     return {
       propertiesPagination: {
-        data: []
-      }
-    }
+        data: [],
+      },
+    };
   },
   async asyncData({ $axios }) {
     let propertiesPagination = {};
@@ -46,8 +51,23 @@ export default {
   },
   computed: {
     properties() {
-      return this.propertiesPagination.data || []
-    }
-  }
+      return this.propertiesPagination.data || [];
+    },
+  },
+  methods: {
+    propertyDeleted(id) {
+      const index = this.properties.findIndex((el) => el.id == id);
+
+      if (index < 0) return;
+
+      let properties = [...this.properties]
+
+      properties.splice(index, 1);
+
+      Object.assign(this.propertiesPagination, {data: properties})
+
+      // debugger
+    },
+  },
 };
 </script>
