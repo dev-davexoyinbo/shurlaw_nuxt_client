@@ -8,22 +8,22 @@
 
     <div class="d-navigation">
       <ul>
-        <li class="active">
+        <li :class="{active: $nuxt.$route.fullPath == '/dashboard'}">
           <nuxt-link to="/dashboard"
             ><i class="ti-user"></i>My Profile</nuxt-link
           >
         </li>
-        <li>
+        <li :class="{active: $nuxt.$route.fullPath.startsWith('/dashboard/agents')}">
           <nuxt-link to="/dashboard/agents"
             ><i class="ti-bookmark"></i>All Agents</nuxt-link
           >
         </li>
-        <li>
+         <li :class="{active: $nuxt.$route.fullPath.startsWith('/dashboard/my-properties')}">
           <nuxt-link to="/dashboard/my-properties"
             ><i class="ti-layers"></i>My Listings</nuxt-link
           >
         </li>
-        <li>
+        <li :class="{active: $nuxt.$route.fullPath.startsWith('/dashboard/create-property')}">
           <nuxt-link to="/dashboard/create-property"
             ><i class="ti-pencil-alt"></i>Add New Property</nuxt-link
           >

@@ -76,12 +76,16 @@ export default {
         (el) => el.id == agentId
       );
 
+
       // debugger
 
       if (index < 0) return;
       let agents = [...this.agents];
 
-      agents.splice(index, 1, newAgent);
+      let agent = this.agents[index]
+      Object.assign(agent, newAgent);
+
+      agents.splice(index, 1, agent);
 
       Object.assign(this.agentsPaginationData, { data: agents });
     },
