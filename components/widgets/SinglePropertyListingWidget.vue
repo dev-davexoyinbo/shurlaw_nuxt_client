@@ -7,7 +7,7 @@
       </div>
       <div class="sd-list-right">
         <h4 class="listing_dashboard_title">
-          <a href="#" class="theme-cl">{{ property.title }}</a>
+          <a @click.prevent="gotoPage(`/property/${property.slug}`)" :href="`/property/${property.slug}`" class="theme-cl">{{ property.title }}</a>
         </h4>
         <div class="user_dashboard_listed">
           Price: N {{ price }} {{ property.status == "RENT" ? "/ yr" : "" }}
@@ -28,7 +28,12 @@
           , Area: {{ property.area }} sq m
         </div>
         <div class="action">
-          <a href="#" data-toggle="tooltip" data-placement="top" title="Edit"
+          <a
+            @click.prevent="gotoPage(`/property/${property.slug}/edit`)"
+            :href="`/property/${property.slug}/edit`"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Edit"
             ><i class="ti-pencil"></i
           ></a>
           <a
@@ -74,6 +79,10 @@ export default {
     },
   },
   methods: {
+    gotoPage(path) {
+      event.preventDefault();
+      this.$nuxt.$router.push(path);
+    },
     deleteProperty() {
       event.preventDefault();
 

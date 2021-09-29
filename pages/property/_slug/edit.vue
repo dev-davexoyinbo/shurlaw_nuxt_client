@@ -28,6 +28,7 @@
                         class="form-control"
                         name="title"
                         required
+                        :value="property.title"
                       />
                     </div>
 
@@ -40,8 +41,18 @@
                         required
                       >
                         <option value="">&nbsp;</option>
-                        <option value="RENT">For Rent</option>
-                        <option value="SALE">For Sale</option>
+                        <option
+                          value="RENT"
+                          :selected="property.status == `RENT`"
+                        >
+                          For Rent
+                        </option>
+                        <option
+                          value="SALE"
+                          :selected="property.status == `SALE`"
+                        >
+                          For Sale
+                        </option>
                       </select>
                     </div>
 
@@ -62,6 +73,7 @@
                           v-for="propertyType in propertyTypes"
                           :value="propertyType"
                           :key="propertyType"
+                          :selected="property.type == propertyType"
                         >
                           {{ propertyTypes[propertyType].toLowerCase() }}
                         </option>
@@ -76,16 +88,20 @@
                         placeholder="NGN"
                         required
                         name="price"
+                        :value="property.price"
                       />
                     </div>
 
                     <div class="form-group col-md-6">
-                      <label>Area (sq m2) <span class="text-danger">*</span></label>
+                      <label
+                        >Area (sq m2) <span class="text-danger">*</span></label
+                      >
                       <input
                         type="text"
                         class="form-control"
                         name="area"
                         required
+                        :value="property.area"
                       />
                     </div>
 
@@ -98,7 +114,12 @@
                         required
                       >
                         <option value="">&nbsp;</option>
-                        <option v-for="i in 1001" :key="i" :value="i - 1">
+                        <option
+                          v-for="i in 1001"
+                          :key="i"
+                          :value="i - 1"
+                          :selected="property.bedroom_count == i - 1"
+                        >
                           {{ i - 1 }}
                         </option>
                       </select>
@@ -115,7 +136,12 @@
                         class="form-control"
                       >
                         <option value="">&nbsp;</option>
-                        <option v-for="i in 1001" :key="i" :value="i - 1">
+                        <option
+                          v-for="i in 1001"
+                          :key="i"
+                          :value="i - 1"
+                          :selected="property.bathroom_count == i - 1"
+                        >
                           {{ i - 1 }}
                         </option>
                       </select>
@@ -199,6 +225,7 @@
                         class="form-control"
                         name="address"
                         required
+                        :value="property.address"
                       />
                     </div>
 
@@ -209,6 +236,7 @@
                         class="form-control"
                         name="city"
                         required
+                        :value="property.city"
                       />
                     </div>
 
@@ -219,6 +247,7 @@
                         class="form-control"
                         name="state"
                         required
+                        :value="property.state"
                       />
                     </div>
                     <div class="form-group col-md-6">
@@ -228,6 +257,7 @@
                         class="form-control"
                         name="country"
                         required
+                        :value="property.country"
                       />
                     </div>
 
@@ -238,6 +268,7 @@
                         class="form-control"
                         name="zip_code"
                         required
+                        :value="property.zip_code"
                       />
                     </div>
                   </div>
@@ -257,6 +288,7 @@
                         class="form-control h-120"
                         name="description"
                         required
+                        :value="property.description"
                       ></textarea>
                     </div>
 
@@ -268,11 +300,36 @@
                         name="building_age"
                       >
                         <option value="">&nbsp;</option>
-                        <option value="0 - 5 Years">0 - 5 Years</option>
-                        <option value="6 - 10Years">6 - 10Years</option>
-                        <option value="11 - 15 Years">11 - 15 Years</option>
-                        <option value="16 - 20 Years">0 - 20 Years</option>
-                        <option value="20+ Years">20+ Years</option>
+                        <option
+                          value="0 - 5 Years"
+                          :selected="property.building_age == '0 - 5 Years'"
+                        >
+                          0 - 5 Years
+                        </option>
+                        <option
+                          value="6 - 10Years"
+                          :selected="property.building_age == '6 - 10Years'"
+                        >
+                          6 - 10Years
+                        </option>
+                        <option
+                          value="11 - 15 Years"
+                          :selected="property.building_age == '11 - 15 Years'"
+                        >
+                          11 - 15 Years
+                        </option>
+                        <option
+                          value="16 - 20 Years"
+                          :selected="property.building_age == '16 - 20 Years'"
+                        >
+                          0 - 20 Years
+                        </option>
+                        <option
+                          value="20+ Years"
+                          :selected="property.building_age == '20+ Years'"
+                        >
+                          20+ Years
+                        </option>
                       </select>
                     </div>
 
@@ -284,7 +341,12 @@
                         name="garage_count"
                       >
                         <option value="">&nbsp;</option>
-                        <option v-for="i in 1000" :key="i" :value="i">
+                        <option
+                          v-for="i in 1000"
+                          :key="i"
+                          :value="i"
+                          :selected="property.garage_count == i"
+                        >
                           {{ i }}
                         </option>
                       </select>
@@ -294,7 +356,12 @@
                       <label>Rooms (optional)</label>
                       <select id="rooms" class="form-control" name="room_count">
                         <option value="">&nbsp;</option>
-                        <option v-for="i in 1000" :key="i" :value="i">
+                        <option
+                          v-for="i in 1000"
+                          :key="i"
+                          :value="i"
+                          :selected="property.room_count == i"
+                        >
                           {{ i }}
                         </option>
                       </select>
@@ -315,6 +382,7 @@
                               :name="`a-${feature}`"
                               type="checkbox"
                               :data-value="feature"
+                              :checked="property.other_features.some(el => el == propertyFeatures[feature])"
                             />
                             <label
                               :for="`a-${feature}`"
@@ -341,6 +409,7 @@
                         class="form-control"
                         name="contact_name"
                         required
+                        :value="property.contact_name"
                       />
                     </div>
 
@@ -351,6 +420,7 @@
                         name="contact_email"
                         required
                         class="form-control"
+                        :value="property.contact_email"
                       />
                     </div>
 
@@ -360,6 +430,7 @@
                         type="text"
                         name="contact_phone"
                         class="form-control"
+                        :value="property.contact_phone"
                       />
                     </div>
                   </div>
@@ -406,9 +477,11 @@
 export default {
   layout: "dashboard",
   middleware: ["auth"],
-  async asyncData({ $axios }) {
+  async asyncData({ $axios, params }) {
     let propertyTypes = {};
     let propertyFeatures = {};
+    let property = {};
+
     const fetchPropertiesTypes = new Promise((resolve, reject) => {
       $axios
         .$get("/properties/types")
@@ -432,11 +505,30 @@ export default {
         .catch((e) => reject(e));
     });
 
-    await Promise.allSettled([fetchPropertiesTypes, fetchPropertiesFeatures]);
+    const fetchProperties = new Promise((resolve, reject) => {
+      $axios
+        .$get(`/properties/${params.slug}`)
+        .then((response) => {
+          property = response.property;
+          resolve();
+        })
+        .catch((e) => {
+          console.log(e);
+          error({ statusCode: 404, message: "Post not found" });
+          reject(e);
+        });
+    });
+
+    await Promise.allSettled([
+      fetchProperties,
+      fetchPropertiesTypes,
+      fetchPropertiesFeatures,
+    ]);
 
     return {
       propertyTypes,
       propertyFeatures,
+      property,
     };
   },
 
@@ -455,6 +547,9 @@ export default {
   },
   mounted() {
     this.handleGalleryEvents();
+    this.gallery.urls = this.property.gallery.map(el => {
+        return process.env.baseUrl.replace(/\/$/, '') + '/' + el.replace(/^\//, '')
+    })
   },
   methods: {
     async handleGalleryEvents() {
@@ -528,12 +623,12 @@ export default {
       this.errorMessages.gallery = "";
       this.errorMessages.main = "";
 
-      if (this.gallery.files.length == 0) {
-        this.errorMessages.gallery = "Gallery images are required";
-        const gallerySection = this.$refs.gallerySection;
-        gallerySection.scrollIntoView({ behaviour: "smooth" });
-        return;
-      }
+    //   if (this.gallery.files.length == 0) {
+    //     this.errorMessages.gallery = "Gallery images are required";
+    //     const gallerySection = this.$refs.gallerySection;
+    //     gallerySection.scrollIntoView({ behaviour: "smooth" });
+    //     return;
+    //   }
 
       //valid data
       const form = this.$refs.form;
@@ -550,7 +645,7 @@ export default {
 
       this.loading = true;
       this.$axios
-        .$post("/properties", formData)
+        .$post(`/properties/${this.property.slug}`, formData)
         .then((response) => {
           form.reset();
           this.$nuxt.$router.push(`/property/${response.slug}`);
