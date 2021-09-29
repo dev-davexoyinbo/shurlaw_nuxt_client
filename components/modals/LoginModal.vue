@@ -93,6 +93,7 @@ export default {
         .loginWith("local", { data: { email, password } })
         .then((response) => {
           // this.$toast.success("Successfully authenticated");
+          windows.href = "/dashboard"
         })
         .catch((e) => {
           // this.$toast.error("Error while authenticating");

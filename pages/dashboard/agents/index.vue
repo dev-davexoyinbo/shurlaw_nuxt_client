@@ -22,79 +22,74 @@
           </tr>
 
           <!-- Item #1 -->
-          <tr>
-            <td class="property-container">
-              <img src="~assets/img/user-2.jpg" alt="" />
-              <div class="title">
-                <h4><a href="#">Tinuke Thompson</a></h4>
-                <span>6 Bishop Ave. Lagos </span>
-                <span class="table-property-price">3 Properties</span>
-              </div>
-            </td>
-            <td class="action">
-              <a href="#" class="delete"><i class="ti-close"></i> Disable</a>
-            </td>
-          </tr>
-
-          <!-- Item #2 -->
-          <tr>
-            <td class="property-container">
-              <img src="~assets/img/user-1.jpg" alt="" />
-              <div class="title">
-                <h4><a href="#">TD JAKES</a></h4>
-                <span>9 Bishop Ave. Lagos </span>
-                <span class="table-property-price">30 Properties</span>
-              </div>
-            </td>
-            <td class="action">
-              <a href="#" class="delete"><i class="ti-close"></i> Disable</a>
-            </td>
-          </tr>
-
-          <!-- Item #3 -->
-          <tr>
-            <td class="property-container">
-              <img src="~assets/img/user-4.jpg" alt="" />
-              <div class="title">
-                <h4><a href="#">Florence Micheals</a></h4>
-                <span>9 Bishop Ave. Ikoyi </span>
-                <span class="table-property-price">9 Properties</span>
-              </div>
-            </td>
-            <td class="action">
-              <a href="#" class="delete"><i class="ti-close"></i> Disbale</a>
-            </td>
-          </tr>
-
-          <!-- Item #4 -->
-          <tr>
-            <td class="property-container">
-              <img src="~assets/img/user-5.jpg" alt="" />
-              <div class="title">
-                <h4><a href="#">Micheal Thornton</a></h4>
-                <span>9 Bishop Ave. Lagos </span>
-                <span class="table-property-price">30 Properties</span>
-              </div>
-            </td>
-            <td class="action">
-              <a href="#" class="delete"><i class="ti-close"></i> Disable</a>
-            </td>
-          </tr>
+          <agent-strip-widget
+            @toggle-active="toggleActive($event)"
+            :agent="agent"
+            v-for="agent in agents"
+            :key="agent.id"
+          />
         </tbody>
       </table>
     </div>
-
   </div>
 </template>
 		<!-- New Js -->
 <script>
+import AgentStripWidget from "~/components/widgets/AgentStripWidget.vue";
 export default {
+  components: { AgentStripWidget },
   layout: "dashboard",
+  data: () => ({
+    agentsPaginationData: {
+      data: [],
+    },
+  }),
+  async asyncData({ $axios }) {
+    let agentsPaginationData = {
+      data: [],
+    };
+
+    const fetchAgents = new Promise((resolve, reject) => {
+      $axios
+        .$get("/users/agents")
+        .then((response) => {
+          if (response.agents) agentsPaginationData = response.agents;
+          resolve();
+        })
+        .catch((e) => reject(e));
+    });
+
+    await Promise.allSettled([fetchAgents]);
+
+    return { agentsPaginationData };
+  },
   methods: {
     gotoPage(path) {
-      event.preventDefault()
-      this.$nuxt.$router.push(path)
-    }
-  }
+      event.preventDefault();
+      this.$nuxt.$router.push(path);
+    },
+    toggleActive(newAgent) {
+      if(!(newAgent && newAgent.id)) return
+      const agentId = newAgent.id
+
+      const index = (this.agentsPaginationData.data || []).findIndex(
+        (el) => el.id == agentId
+      );
+
+      // debugger
+
+      if (index < 0) return;
+      let agents = [...this.agents];
+
+      agents.splice(index, 1, newAgent);
+
+      Object.assign(this.agentsPaginationData, { data: agents });
+    },
+  },
+  computed: {
+    agents() {
+      return this.agentsPaginationData.data || [];
+    },
+  },
 };
 </script>
