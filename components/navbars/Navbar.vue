@@ -3,7 +3,7 @@
     <div class="container">
       <nav id="navigation" class="navigation navigation-landscape">
         <div class="nav-header">
-          <a class="nav-brand" href="#">
+          <a class="nav-brand" href="#" @click.prevent="gotoPage(`/`)">
             <img src="~/assets/img/spl.png" width="50%" class="logo" alt="" />
           </a>
           <div class="nav-toggle"></div>
@@ -46,7 +46,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    gotoPage(path) {
+      this.$nuxt.$router.push(path)
+    }
+  }
+};
 </script>
 
 <style>

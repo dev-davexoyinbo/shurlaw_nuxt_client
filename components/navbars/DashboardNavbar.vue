@@ -45,11 +45,15 @@
             ),
           }"
         >
-          <nuxt-link to="/dashboard/create-property"
+          <nuxt-link to="/dashboard/create-property" 
             ><i class="ti-pencil-alt"></i>Add New Property</nuxt-link
           >
         </li>
-        <li>
+        <li :class="{
+            active: $nuxt.$route.fullPath.startsWith(
+              '/dashboard/change-password'
+            ),
+          }">
           <nuxt-link to="/dashboard/change-password"
             ><i class="ti-unlock"></i>Change Password</nuxt-link
           >
