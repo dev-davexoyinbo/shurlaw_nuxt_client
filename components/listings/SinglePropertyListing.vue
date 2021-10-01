@@ -3,7 +3,7 @@
     <div class="property-listing property-1">
       <div class="listing-img-wrapper">
         <a href="#">
-          <img src="~/assets/img/p-1.jpg" class="img-fluid mx-auto" alt="" />
+          <img :src="gallery[0]" class="img-fluid mx-auto" alt="" />
         </a>
         <span class="property-type"
           >For <span class="text-lower">{{ property.status }}</span></span
@@ -57,6 +57,11 @@ export default {
   computed: {
     price() {
       return Number(Number(this.property.price).toFixed(2)).toLocaleString();
+    },
+    gallery() {
+        return this.property.gallery.map(el => {
+            return process.env.baseUrl.replace(/\/$/, '') + "/" + el.replace(/^\//, "")
+        })
     },
   },
 };

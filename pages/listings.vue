@@ -62,7 +62,7 @@
             </div>
 
             <!-- Pagination -->
-            <paginations />
+            <paginations @navigateTo="navigateTo($event)" :paginationData="paginationData" />
           </div>
 
           <!-- property Sidebar -->
@@ -104,6 +104,7 @@ export default {
   components: { Paginations, SearchWidget, SinglePropertyListing },
   data() {
     return {
+      page: 1,
       formData: {
         title: "",
         min_price: "",
@@ -132,10 +133,13 @@ export default {
     updateFormData(val) {
       Object.assign(this.formData, val);
     },
+    navigateTo(page) {
+      this.page = page
+    }
   },
   computed: {
     queryString() {
-      let queryString = "";
+      let queryString = `page=${this.page}&`;
 
       for (let key in this.formData) {
         queryString += `${key}=${encodeURI(this.formData[key])}&`;
@@ -157,16 +161,19 @@ export default {
 
       return placeHolder
     },
+    
   },
   watch: {
     formData: {
       deep: true,
       handler() {
-        this.$router.push(this.searchUrl);
+        this.$nuxt.$router.push(this.searchUrl);
       },
     },
+    page(){
+      this.$nuxt.$router.push(this.searchUrl);
+    },
     $route() {
-      console.log(this.$nuxt.$route);
       this.$fetch();
     },
   },
