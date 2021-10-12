@@ -18,10 +18,6 @@
       <main-footer />
       <!-- ============================ Footer End ================================== -->
 
-      <!-- Log In Modal -->
-      <login-modal />
-      <!-- End Modal -->
-
       <!-- Sign Up Modal -->
       <signup-modal />
       <!-- End Modal -->
@@ -31,6 +27,10 @@
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
+
+    <!-- Log In Modal -->
+    <login-modal />
+    <!-- End Modal -->
 
     <!-- Color Switcher -->
     <color-switcher />

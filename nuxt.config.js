@@ -39,7 +39,8 @@ export default {
   css: [
     "~assets/css/page-transition.css",
     "~assets/css/styles.css",
-    "~assets/css/colors.css"
+    "~assets/css/colors.css",
+    "~assets/css/scss/custom-styles.scss",
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -83,6 +84,7 @@ export default {
   build: {},
 
   auth: {
+    watchLoggedIn: false,
     redirect: {
       login: "/",
       logout: "/",

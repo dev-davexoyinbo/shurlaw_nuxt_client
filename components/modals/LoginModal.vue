@@ -7,10 +7,7 @@
     aria-labelledby="registermodal"
     aria-hidden="true"
   >
-    <div
-      class="modal-dialog modal-dialog-centered login-pop-form"
-      role="document"
-    >
+    <div class="modal-dialog modal-dialog-centered login-pop-form">
       <div class="modal-content" id="registermodal">
         <span class="mod-close" data-dismiss="modal" aria-hidden="true"
           ><i class="ti-close"></i
@@ -47,13 +44,16 @@
                 </div>
               </div>
 
-              <small class="text-danger text-center">{{ errorMessage }}</small>
+              <transition name="fade">
+                <div class="error-message" v-show="errorMessage">
+                  <span class="font-bold">An error Occurred!</span>&nbsp;{{
+                    errorMessage
+                  }}
+                </div>
+              </transition>
 
               <div class="form-group">
-                <button
-                  type="submit"
-                  class="btn btn-md full-width pop-login"
-                >
+                <button type="submit" class="btn btn-md full-width pop-login">
                   Login
                 </button>
               </div>
@@ -77,9 +77,8 @@ export default {
     };
   },
   methods: {
-    login() {
+    login: function () {
       event.preventDefault();
-      event.stopPropagation();
 
       const email = this.$refs.emailInput.value;
       const password = this.$refs.passwordInput.value;
@@ -92,12 +91,20 @@ export default {
         .loginWith("local", { data: { email, password } })
         .then((response) => {
           // this.$toast.success("Successfully authenticated");
-          windows.href = "/dashboard"
+          windows.href = "/dashboard";
         })
         .catch((e) => {
           // this.$toast.error("Error while authenticating");
           if (e.response.data && e.response.data.message)
-            this.errorMessage = e.response.data.message;
+            this.errorMessage = `e.response.data.message`;
+
+          this.$nextTick(() => {
+            $("#login").modal("hide");
+            $("body").removeClass("modal-open");
+            $(".modal-backdrop").remove();
+
+            $("#login").modal({ show: true });
+          });
         })
         .finally(() => {
           setTimeout(() => {
