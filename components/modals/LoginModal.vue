@@ -73,11 +73,11 @@
 export default {
   data() {
     return {
-      errorMessage: "",
+      errorMessage: ""
     };
   },
   methods: {
-    login: function () {
+    login: function() {
       event.preventDefault();
 
       const email = this.$refs.emailInput.value;
@@ -89,11 +89,11 @@ export default {
       this.errorMessage = "";
       this.$auth
         .loginWith("local", { data: { email, password } })
-        .then((response) => {
+        .then(response => {
           // this.$toast.success("Successfully authenticated");
-          windows.href = "/dashboard";
+          location.href = "/dashboard";
         })
-        .catch((e) => {
+        .catch(e => {
           // this.$toast.error("Error while authenticating");
           if (e.response.data && e.response.data.message)
             this.errorMessage = `e.response.data.message`;
@@ -115,10 +115,9 @@ export default {
     gotoPage(path) {
       event?.preventDefault();
       return this.$nuxt.$router.push(path);
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style>
-</style>
+<style></style>
